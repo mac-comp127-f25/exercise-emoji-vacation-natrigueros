@@ -32,8 +32,13 @@ public class EmojiVacation {
     }
 
     private static void doSlideShow(CanvasWindow canvas) {
-        // TODO: [Instructions step 8] Change this to an actual slideshow
-        generateVacationPhoto(canvas);
+        while (true) {
+            generateVacationPhoto(canvas);
+            canvas.draw();
+            canvas.pause(3000);
+            canvas.removeAll();
+        }
+
     }
 
     private static void generateVacationPhoto(CanvasWindow canvas) {
@@ -80,15 +85,18 @@ public class EmojiVacation {
     }
 
     private static GraphicsGroup createRandomEmoji(double size) {
-        
-        // TODO: [Instructions step 7] Change this so that instead of always creating a smiley face,
-        //       it randomly selects one of the many available emojis.
-        //
-        // Hint: You can use chained if/else conditionals: with a certain probability, return emoji
-        // type A, else with some other probability return emoji type B, else with a certain
-        // probability ... etc ... else return a smiley by default.
-        //
-        return ProvidedEmojis.createSmileyFace(size);
+        if (percentChance(20)) {
+            return ProvidedEmojis.createFrownyFace(size);
+        }
+        else if (percentChance(40)) {
+            return ProvidedEmojis.createWinkingFace(size);
+        }
+        else if (percentChance(80)) {
+            return ProvidedEmojis.createContentedFace(size);
+        }
+        else {
+            return ProvidedEmojis.createSmileyFace(size);
+        }
     }
 
     private static void positionFamily(
